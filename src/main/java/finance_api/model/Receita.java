@@ -22,7 +22,7 @@ public class Receita {
 
     private BigDecimal valor;
 
-    private LocalDate dataRecbimento;
+    private LocalDate dataRecebimento;
 
     @Enumerated(EnumType.STRING)
     private CategoriaReceita categoria;
