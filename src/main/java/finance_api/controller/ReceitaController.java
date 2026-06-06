@@ -4,7 +4,9 @@ import finance_api.dto.ReceitaRequestDTO;
 import finance_api.dto.ReceitaResponseDTO;
 import finance_api.mapper.ReceitaMapper;
 import finance_api.model.Receita;
+import finance_api.model.Usuario;
 import finance_api.service.ReceitaService;
+import finance_api.service.UsuarioService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,6 +21,7 @@ import java.util.List;
 public class ReceitaController {
 
     private final ReceitaService service;
+    private final UsuarioService usuarioService;
     
     @GetMapping
     public List<Receita> listar(){
@@ -36,6 +39,9 @@ public class ReceitaController {
 
         Receita receita = ReceitaMapper.toEntity(dto);
 
+        Usuario usuario = usuarioService.buscarPorId(dto.usuarioId());
+        receita.setUsuario(usuario);
+
         return ReceitaMapper.toDTO(
                 service.salvar(receita)
         );
@@ -52,3 +58,6 @@ public class ReceitaController {
         service.excluir(id);
     }
 }
+
+
+

@@ -3,6 +3,7 @@ package finance_api.mapper;
 import finance_api.dto.ReceitaRequestDTO;
 import finance_api.dto.ReceitaResponseDTO;
 import finance_api.model.Receita;
+import finance_api.model.Usuario;
 
 public class ReceitaMapper {
 

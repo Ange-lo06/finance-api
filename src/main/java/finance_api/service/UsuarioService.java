@@ -5,6 +5,8 @@ import finance_api.exception.RecursoNaoEncontradoException;
 import finance_api.model.Usuario;
 import finance_api.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,8 +15,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UsuarioService {
     private final UsuarioRepository repository;
+    private final BCryptPasswordEncoder passwordEncoder;
 
     public Usuario salvar(Usuario usuario){
+        usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
         return repository.save(usuario);
     }
 

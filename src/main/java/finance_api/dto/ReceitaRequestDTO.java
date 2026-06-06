@@ -20,6 +20,9 @@ public record ReceitaRequestDTO(
         LocalDate dataRecebimento,
 
         @NotNull(message = "Categoria é obrigatorio")
-        CategoriaReceita categoria
+        CategoriaReceita categoria,
+
+        @NotNull(message = "Usuario é obrigatorio")
+        Long usuarioId
 ) {
 }

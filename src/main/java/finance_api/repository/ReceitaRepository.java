@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 public interface ReceitaRepository extends JpaRepository<Receita, Long> {
 
     @Query(""" 
-            Select Coalesce(sum(r.valor),0) from receita r 
+            Select Coalesce(sum(r.valor),0) from Receita r 
             """)
     BigDecimal somarReceita();
 }
