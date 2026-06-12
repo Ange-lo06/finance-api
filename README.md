@@ -2,108 +2,81 @@
 
 API REST para gerenciamento financeiro pessoal desenvolvida com Java e Spring Boot.
 
-## Objetivo
-
-O projeto tem como objetivo permitir o controle de receitas, despesas e usuários, servindo também como estudo prático de desenvolvimento Back-end com Spring Boot, JPA, PostgreSQL e autenticação JWT.
-
-## Tecnologias Utilizadas
+## Tecnologias
 
 * Java 17
 * Spring Boot
-* Spring Data JPA
 * Spring Security
+* JWT
+* Spring Data JPA
 * PostgreSQL
-* JWT (JSON Web Token)
-* Maven
+* Swagger/OpenAPI
 * Lombok
-* Swagger / OpenAPI
 
-## Funcionalidades Implementadas
+## Funcionalidades
 
 ### Usuários
 
 * Cadastro de usuários
-* Listagem de usuários
-* Busca por ID
-* Atualização de usuário
-* Exclusão de usuário
+* Atualização de usuários
+* Exclusão de usuários
+
+### Autenticação
+
+* Login com email e senha
+* Geração de token JWT
+* Proteção de rotas
 
 ### Receitas
 
 * Cadastro de receitas
-* Listagem de receitas
-* Busca por ID
+* Consulta de receitas
 * Atualização de receitas
 * Exclusão de receitas
 
 ### Despesas
 
 * Cadastro de despesas
-* Listagem de despesas
-* Busca por ID
+* Consulta de despesas
 * Atualização de despesas
 * Exclusão de despesas
 
-### Dashboard Financeiro
+### Dashboard
 
-* Soma total de receitas
-* Soma total de despesas
-* Cálculo de saldo financeiro
-
-### Tratamento Global de Exceções
-
-* Recurso não encontrado (404)
-* Erros de validação (400)
-
-### DTOs e Mappers
-
-* Separação entre entidades e objetos de transferência
-* Conversão através de classes Mapper
-
-### Segurança
-
-* Spring Security configurado
-* Senhas criptografadas com BCrypt
-* Geração de Token JWT
-* Validação de Token JWT
-* Extração de informações do Token JWT
-
-## Estrutura do Projeto
-
-src/main/java
-├── controller
-├── service
-├── repository
-├── model
-├── dto
-├── mapper
-├── exception
-├── security
-└── config
-
-## Banco de Dados
-
-PostgreSQL
-
-Configuração no application.properties:
-
-spring.datasource.url=jdbc:postgresql://localhost:5432/finance-api
-spring.datasource.username=postgres
-spring.datasource.password=1234
+* Total de receitas
+* Total de despesas
+* Saldo atual
 
 ## Próximas Implementações
 
-* Filtro JWT Authentication
-* Login com AuthenticationManager
-* Proteção de rotas por token
-* Controle de acesso por usuário
+* Filtro por período
+* Filtro por categoria
+* Paginação completa
 * Relatórios financeiros
-* Testes unitários
-* Docker
+* Estatísticas mensais
 * Deploy em nuvem
 
-## Autor
+## Como executar
 
-Angelo Siqueira
+1. Clonar o projeto
 
-Projeto desenvolvido para estudos de Engenharia de Software e desenvolvimento Back-end com Java e Spring Boot.
+```bash
+git clone https://github.com/Ange-lo06/finance-api.git
+```
+
+2. Configurar banco PostgreSQL
+
+3. Configurar application.properties
+
+4. Executar
+
+```bash
+mvn spring-boot:run
+```
+
+5. Acessar Swagger
+
+http://localhost:8080/swagger-ui/index.html
+
+```
+```
