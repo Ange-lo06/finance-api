@@ -1,5 +1,8 @@
 package finance_api.controller;
 
+import finance_api.dto.UsuarioRequestDTO;
+import finance_api.dto.UsuarioResponseDTO;
+import finance_api.mapper.UsuarioMapper;
 import finance_api.model.Usuario;
 import finance_api.service.UsuarioService;
 import jakarta.validation.Valid;
@@ -28,8 +31,9 @@ public class UsuarioController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Usuario salvar(@Valid @RequestBody Usuario usuario){
-        return service.salvar(usuario);
+    public UsuarioResponseDTO salvar(@RequestBody UsuarioRequestDTO dto){
+        Usuario usuario = UsuarioMapper.toEntity(dto);
+        return UsuarioMapper.toDTO(service.salvar(usuario));
     }
 
     @PutMapping("/{id}")

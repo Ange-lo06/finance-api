@@ -7,8 +7,12 @@ import finance_api.model.Receita;
 import finance_api.model.Usuario;
 import finance_api.service.ReceitaService;
 import finance_api.service.UsuarioService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springdoc.core.annotations.ParameterObject;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +21,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/receitas")
+@SecurityRequirement(name = "bearerAuth")
 @RequiredArgsConstructor
 public class ReceitaController {
 
@@ -24,8 +29,14 @@ public class ReceitaController {
     private final UsuarioService usuarioService;
     
     @GetMapping
-    public List<Receita> listar(){
-        return service.listarTodos();
+    public Page<ReceitaResponseDTO> listar(
+            @RequestParam(defaultValue = "0")
+            int page,
+
+            @RequestParam(defaultValue = "10")
+            int size
+    ){
+        return service.listarDoUsuarioLogado(page, size);
     }
 
     @GetMapping("/{id}")
@@ -57,6 +68,12 @@ public class ReceitaController {
     public void excluir(@PathVariable Long id){
         service.excluir(id);
     }
+
+    @GetMapping("/paginado")
+    public Page<ReceitaResponseDTO> listarPaginado(@ParameterObject Pageable pageable){
+        return service.listarPaginado(pageable).map(ReceitaMapper::toDTO);
+    }
+
 }
 
 

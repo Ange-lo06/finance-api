@@ -31,6 +31,11 @@ public class UsuarioService {
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Usuario Não encontrado"));
     }
 
+    public Usuario buscarPorEmail(String email){
+        return repository.findByEmail(email)
+                .orElseThrow(()-> new RuntimeException("Email não encotrado"));
+    }
+
     public void excluir(Long id){
         buscarPorId(id);
         repository.deleteById(id);

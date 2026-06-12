@@ -1,8 +1,10 @@
 package finance_api.service;
 
 import finance_api.dto.DashboardResumoDTO;
+import finance_api.model.Usuario;
 import finance_api.repository.DespesaRepository;
 import finance_api.repository.ReceitaRepository;
+import finance_api.security.SecurityUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,11 +16,16 @@ public class DashboardService {
 
     private final ReceitaRepository receitaRepository;
     private final DespesaRepository despesaRepository;
+    private final UsuarioService usuarioService;
 
     public DashboardResumoDTO obterResumo(){
-        BigDecimal receitas = receitaRepository.somarReceita();
+        String email = SecurityUtils.getEmailUsuarioLogado();
 
-        BigDecimal despesas = despesaRepository.somarDespesas();
+        Usuario usuario = usuarioService.buscarPorEmail(email);
+
+        BigDecimal receitas = receitaRepository.somarReceita(usuario);
+
+        BigDecimal despesas = despesaRepository.somarDespesas(usuario);
 
         BigDecimal saldo = receitas.subtract(despesas);
 
